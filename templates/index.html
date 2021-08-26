@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>My Events List Planner!</h1>
+
+<form action="/events" method="post">
+    <label for="date">Date</label>
+    <br>
+    <input type="date" name="date">
+    <br>
+    <label for="name">Name</label>
+    <br>
+    <input type="text" name="name">
+    <br>
+    <label for="num_of_guests">Number of Guests</label>
+    <br>
+    <input type="number" name="num_of_guests">
+    <br>
+    <label for="location">Location</label>
+    <br>
+    <input type="text" name="location">
+    <br>
+    <label for="recurring">Is this a recurring event?</label>
+    <br>
+    <input type="text" name="recurring" placeholder="y/n">
+    <br>
+    <label for="description">Description</label>
+    <br>
+    <textarea type="text" name="description" rows='5' cols='20'></textarea>
+    <br>
+    <input type="submit" value="Add event">
+</form>
+
+{% for event in events %}
+    {% if event.recurring %}
+        <p class="recurring">
+            || <span id="date">{{ event.date }}</span>: <b> {{ event.name }} || Number of Guests: {{ event.num_of_guests }} || Location: {{ event.location }} || <br> <span id="description">{{ event.description }} ♻ </span></b> 
+        </p>
+        {% else %}
+        <p>
+            || <span id="date">{{ event.date }}</span>: <b> {{ event.name }} || Number of Guests: {{ event.num_of_guests }} || Location: {{ event.location }} || <br> <span id="description">{{ event.description }}</span></b>
+        </p>
+    {% endif %}
+{% endfor %}
+{% endblock content %}
